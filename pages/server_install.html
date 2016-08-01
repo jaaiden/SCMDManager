@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Installing Server... Please wait!</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../inc/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inc/css/theme-yeti.min.css">
+    <link rel="stylesheet" href="../inc/css/font-awesome.min.css">
+  </head>
+  <body>
+
+    <div class="container-fluid">
+
+      <h2>Please wait...</h2>
+      <p class="lead">Now installing server files for <span id="servername"></span></p>
+      <p>Note: This may take quite a while! Please keep this window open, the installation progress will be displayed below.</p>
+
+      <div class="text-center center-block" id="loading-spinner"><i class="fa fa-fw fa-circle-o-notch fa-5x fa-spin"></i></div>
+
+      <hr>
+
+      <pre id="server-install-output"></pre>
+
+      <p class="lead" id="server-install-complete-text"></p>
+
+    </div>
+
+    <script>window.$ = window.jQuery = require('../inc/js/jquery-1.11.3.min.js');</script>
+    <script src="../inc/js/bootstrap.min.js"></script>
+    <script>
+      // You can also require other files to run in this process
+      require('../server_install_renderer.js')
+    </script>
+  </body>
+</html>

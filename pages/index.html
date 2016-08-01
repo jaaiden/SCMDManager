@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SCMDManager</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../inc/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inc/css/theme-yeti.min.css">
+    <link rel="stylesheet" href="../inc/css/font-awesome.min.css">
+  </head>
+  <body style="padding-top:60px;">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Show/Hide</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">SCMDManager</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+          <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="index.html">Home</a></li> -->
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <p class="navbar-text" id="sysinfo"></p>
+            <li><a href="#" data-toggle="modal" data-target="#settingsModal"><i class="fa fa-fw fa-wrench"></i> Settings</a></li>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+
+
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+
+        <!-- Alerts -->
+        <div id="alerts"></div>
+
+        <!-- System Information -->
+        <div class="panel panel-default" id="system-info-block">
+          <div class="panel-heading"><div class="panel-title">System Information</div></div>
+          <ul class="list-group">
+
+            <li class="list-group-item">
+              <h4 class="list-group-item-heading" id="system-info-hostname"></h4>
+              <p class="list-group-item-text">System Hostname</p>
+            </li>
+            <li class="list-group-item">
+              <h4 class="list-group-item-heading" id="system-info-uptime"></h4>
+              <p class="list-group-item-text">System Uptime</p>
+            </li>
+            <li class="list-group-item">
+              <h4 class="list-group-item-heading" id="system-info-memory"></h4>
+              <p class="list-group-item-text">System Memory Info</p>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- Server List -->
+        <div class="panel panel-default" id="system-info-block">
+          <div class="panel-heading"><div class="panel-title">Server List <a class="pull-right" href="#" data-toggle="modal" data-target="#addServer" id="add-server-btn"><i class="fa fa-fw fa-plus"></i> Create Server</a></div></div>
+          <table class="table table-condensed table-striped table-bordered">
+            <thead>
+              <th>Server Name</th>
+              <th>Game</th>
+              <th>Port</th>
+            </thead>
+            <tbody id="server-list-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modals -->
+    <div class="modal fade" id="settingsModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Settings</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="steamcmdloc">SteamCMD Location</label>
+              <input type="text" name="steamcmdloc" id="steamcmdloc" class="form-control" placeholder="/path/to/steamcmd">
+              <p class="help-text"><a href="#" id="download-steamcmd-link">Don't have SteamCMD? Click here to download it!</a></p>
+              <p class="help-text">Do <strong>NOT</strong> include the steamcmd executable file in the path! The text box should only contain the absolute location of the executable file, <strong>WITH</strong> a trailing slash.</p>
+              <p class="help-text">Examples: <code>/home/user/steamcmd/</code> or <code>C:\steamcmd\</code></p>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+              <label for="steamcmdloc">Clear Settings</label>
+              <p class="help-text text-danger">NOTE: This will clear ALL saved servers AND your SteamCMD location! This will NOT delete your server installations.</p>
+              <button type="button" class="btn btn-danger" id="clear-settings-btn">Clear Settings</button>
+              <p class="help-text" id="clear-settings-text"></p>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary pull-left" id="save-config-btn" data-dismiss="modal">Save Settings</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addServer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Create New Server</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="server-name">Server Name</label>
+              <input type="text" id="server-name" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="server-installdir">Installation Directory</label>
+              <input type="text" id="server-installdir" class="form-control" placeholder="Example: C:\Servers\my-server or /opt/servers/my-server">
+            </div>
+
+            <div class="form-group">
+              <label for="server-appid">Game</label>
+              <select id="server-appid" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="server-port">Server Port</label>
+              <input type="number" id="server-port" class="form-control" value="27015" min="1" max="65535" placeholder="Default: 27015">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="create-server-btn" data-dismiss="modal">Create Server</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>window.$ = window.jQuery = require('../inc/js/jquery-1.11.3.min.js');</script>
+    <script src="../inc/js/bootstrap.min.js"></script>
+    <script> require('../renderer.js') </script>
+  </body>
+</html>
