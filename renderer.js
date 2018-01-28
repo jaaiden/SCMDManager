@@ -218,7 +218,10 @@ clearSettingsBtn.addEventListener('click', function() {
 if (config.has('server')) {
   let serverList = config.get('server')
   for (var srv in serverList) {
-    serverTable.innerHTML += `<tr id="${srv}"><td id="${srv}-name">${srv.name}</td><td id="${srv}-appid">${srv.appid}</td><td id="${srv}-port">${srv.port}</td></tr>`
+    var srvname = config.get('server.' + srv + '.name')
+    var srvappid = config.get('server.' + srv + '.appid')
+    var srvport = config.get('server.' + srv + '.port')
+    serverTable.innerHTML += `<tr id="${srv}"><td id="${srv}-name">${srvname}</td><td id="${srv}-appid">${srvappid}</td><td id="${srv}-port">${srvport}</td></tr>`
   }
 }
 
